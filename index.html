@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farkle Dice Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?
+    family=Asset&
+    family=Bungee+Shade&
+    family=Cinzel:wght@400&
+    family=Crimson+Pro:wght@400;600&
+    family=Modak&
+    family=Monoton&
+    family=Moo+Lah+Lah&
+    family=Poppins:wght@400;600&
+    family=Rubik+Dirt&
+    family=Ruge+Boogie&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Farkle Dice Game</h1>
+  </header>
+
+  <main>
+    <section class="rules">
+      <h2>Farkle Rules</h2>
+      <div class="rules-content">
+        <div class="scoring-table">
+          <h3>Scoring Combinations</h3>
+          <table class="wood-engraved">
+            <thead>
+              <tr>
+                <th>Combination</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Single 1</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>Single 5</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Three 1s</td>
+                <td>1,000</td>
+              </tr>
+              <tr>
+                <td>Three of a kind (except 1s)</td>
+                <td>100 × number</td>
+              </tr>
+              <tr>
+                <td>Four of a kind</td>
+                <td>1,000</td>
+              </tr>
+              <tr>
+                <td>Five of a kind</td>
+                <td>2,000</td>
+              </tr>
+              <tr>
+                <td>Six of a kind</td>
+                <td>3,000</td>
+              </tr>
+              <tr>
+                <td>Straight (1-6)</td>
+                <td>1,500</td>
+              </tr>
+              <tr>
+                <td>Three pairs</td>
+                <td>1,500</td>
+              </tr>
+              <tr>
+                <td>Two triplets</td>
+                <td>2,500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="setup">
+      <label for="numPlayers">Number of Players (1-4):</label>
+      <input type="number" id="numPlayers" min="1" max="4" value="2" />
+      <label for="targetScore">Target Score:</label>
+      <input type="number" id="targetScore" min="1000" step="1000" value="10000" />
+      <button id="startGameBtn">Start Game</button>
+    </section>
+
+    <section class="gameboard hidden" id="gameboard">
+      <div class="players">
+        <h2>Scores</h2>
+        <ul id="scoreList"></ul>
+      </div>
+
+      <div class="currentTurn">
+        <h2 id="activePlayerLabel">Player 1's Turn</h2>
+        <p id="turnScoreLabel">Turn Score: 0</p>
+        <div class="diceContainer">
+          <!-- Dice will be displayed here -->
+          <div id="diceArea" class="diceArea"></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="rollDiceBtn">Roll Dice</button>
+        <button id="bankDiceBtn">Bank Points</button>
+        <button id="endTurnBtn">End Turn</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="farkle.js"></script>
+</body>
+</html>
