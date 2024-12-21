@@ -1,0 +1,532 @@
+/* ===========================================================
+   Reset and Base Styles
+   =========================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Color Variables */
+  --primary-color: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary-color: #f472b6;
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --danger: #ef4444;
+  --success: #22c55e;
+
+  /* Typography */
+  --primary-font: 'Arial', sans-serif;
+  --dice-font: 'Cinzel', serif;
+
+  /* Other Variables */
+  --border-radius: 12px;
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+            0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* ===========================================================
+   Global Styles
+   =========================================================== */
+body {
+  font-family: var(--primary-font);
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--background);
+  padding: 2rem 1rem;
+}
+
+/* Typography */
+h1 {
+  font-size: 3rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+/* ===========================================================
+   Layout Containers
+   =========================================================== */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section {
+  background: var(--surface);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+/* ===========================================================
+   Rules Section
+   =========================================================== */
+.rules {
+  position: relative;
+  z-index: 1;
+}
+
+.rules h2 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.rules h3 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.rules-content {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.scoring-table {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.scoring-table h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  color: #4a3728;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Wood Engraved Table Styles */
+.wood-engraved {
+  background: linear-gradient(145deg, #8b4513, #654321);
+  border-radius: 10px;
+  border: 2px solid #3d2614;
+  box-shadow: 
+    inset 0 0 50px rgba(0,0,0,0.3),
+    0 10px 20px rgba(0,0,0,0.2);
+  color: #2d1810;
+  margin: 0 auto;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.wood-engraved th,
+.wood-engraved td {
+  padding: 12px 20px;
+  text-shadow: 
+    1px 1px 0 rgba(255,255,255,0.2);
+  position: relative;
+  background: linear-gradient(
+    rgba(139, 69, 19, 0.1),
+    rgba(139, 69, 19, 0.2)
+  );
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  font-weight: bold;
+  z-index: 2;
+}
+
+.wood-engraved th {
+  background: rgba(0,0,0,0.3);
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.wood-engraved tr:hover td {
+  background: rgba(255,255,255,0.05);
+}
+
+.wood-engraved tr:last-child td {
+  border-bottom: none;
+}
+
+/* Add wood grain effect */
+.wood-engraved::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 15px,
+    rgba(0,0,0,0.05) 15px,
+    rgba(0,0,0,0.05) 30px
+  );
+  z-index: 1;
+  opacity: 0.5;
+}
+
+/* Add a subtle glow to the text */
+.wood-engraved td, 
+.wood-engraved th {
+  text-shadow: 
+    1px 1px 0 rgba(255,255,255,0.2);
+}
+
+@media (min-width: 768px) {
+  .rules-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.basic-rules ul {
+  list-style-type: none;
+}
+
+.basic-rules li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-light);
+}
+
+.basic-rules li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.scoring-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--primary-font);
+  background: linear-gradient(to right bottom, var(--surface), #f8fafc);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.scoring-table th,
+.scoring-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  font-family: var(--primary-font);
+}
+
+.scoring-table th {
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+}
+
+.scoring-table tr:last-child td {
+  border-bottom: none;
+}
+
+.scoring-table tr:hover td {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+/* Make the rules section sticky on larger screens */
+@media (min-width: 1024px) {
+  .rules {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+/* Adjust spacing when game is active */
+.gameboard:not(.hidden) + .rules {
+  margin-top: 2rem;
+}
+
+/* ===========================================================
+   Setup Section
+   =========================================================== */
+.setup {
+  display: grid;
+  gap: 1rem;
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+}
+
+.setup label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.setup input {
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.setup input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+#startGameBtn {
+  grid-area: start;
+  background: var(--primary-color);
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+#startGameBtn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+/* ===========================================================
+   Game Board
+   =========================================================== */
+.gameboard {
+  display: grid;
+  gap: 2rem;
+  position: relative;
+  z-index: 3;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Players Section */
+.players ul {
+  list-style: none;
+}
+
+.players li {
+  padding: 1rem;
+  background: #f1f5f9;
+  border-radius: var(--border-radius);
+  margin-bottom: 0.5rem;
+}
+
+/* Dice Area */
+.diceArea {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.die {
+  width: 60px;
+  height: 60px;
+  background: var(--surface);
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  transform-style: preserve-3d;
+  font-family: var(--dice-font);
+}
+
+.die:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.die.selected {
+  background: var(--primary-color);
+  color: white;
+}
+
+.die.rolling {
+  animation: rollDice 0.3s ease-in-out infinite;
+}
+
+@keyframes rollDice {
+  0% {
+    transform: translateY(-2px) scale(1.05) rotate(-2deg);
+  }
+  25% {
+    transform: translateY(0px) scale(1.1) rotate(0deg);
+  }
+  50% {
+    transform: translateY(2px) scale(1.05) rotate(2deg);
+  }
+  75% {
+    transform: translateY(0px) scale(1.1) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-2px) scale(1.05) rotate(-2deg);
+  }
+}
+
+/* ===========================================================
+   Controls
+   =========================================================== */
+.controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#rollDiceBtn {
+  background: var(--primary-color);
+  color: white;
+}
+
+#bankDiceBtn {
+  background: var(--success);
+  color: white;
+}
+
+#endTurnBtn {
+  background: var(--danger);
+  color: white;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ===========================================================
+   Responsive Design
+   =========================================================== */
+@media (min-width: 768px) {
+  .setup {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "players target"
+      "start start";
+    align-items: end;
+  }
+
+  .gameboard {
+    grid-template-columns: 250px 1fr;
+  }
+
+  .controls {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .die {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+
+  .controls button {
+    flex: 1;
+    min-width: 120px;
+  }
+}
+
+/* ===========================================================
+   Animations
+   =========================================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+section {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.wood-engraved td:first-child {
+  text-align: right;
+  padding-right: 15px;
+}
+
+.wood-engraved td:last-child {
+  text-align: left;
+  padding-left: 15px;
+}
+
+.wood-engraved th:first-child {
+  text-align: right;
+  padding-right: 15px;
+}
+
+.wood-engraved th:last-child {
+  text-align: left;
+  padding-left: 15px;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#bankDiceBtn:not(:disabled):hover {
+  opacity: 0.8;
+} 
