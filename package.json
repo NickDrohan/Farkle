@@ -1,0 +1,18 @@
+{
+  "name": "farkle-dice-game",
+  "version": "1.0.0",
+  "description": "Browser-based Farkle dice game with comprehensive scoring rules",
+  "main": "farkle.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": ["farkle", "dice", "game"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}
