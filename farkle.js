@@ -413,7 +413,10 @@ class FarkleGame {
 
   /**
    * Calculate Farkle score for a set of dice (like the ones selected).
-   * This function uses simplified standard scoring:
+   * This function uses standard Farkle scoring:
+   *  - Straight (1-6) => 1,500
+   *  - Three pairs => 1,500
+   *  - Two triplets => 2,500
    *  - Single 1 => 100
    *  - Single 5 => 50
    *  - Three of a kind => face value * 100 (except 1 => 1000)
@@ -426,6 +429,25 @@ class FarkleGame {
     diceSet.forEach((val) => counts[val]++);
 
     let totalScore = 0;
+
+    // Check for Straight (1-6) - all six different values
+    if (diceSet.length === 6 &&
+        counts[1] === 1 && counts[2] === 1 && counts[3] === 1 &&
+        counts[4] === 1 && counts[5] === 1 && counts[6] === 1) {
+      return 1500;
+    }
+
+    // Check for Three Pairs
+    const pairs = Object.values(counts).filter(count => count === 2);
+    if (diceSet.length === 6 && pairs.length === 3) {
+      return 1500;
+    }
+
+    // Check for Two Triplets
+    const triplets = Object.values(counts).filter(count => count === 3);
+    if (diceSet.length === 6 && triplets.length === 2) {
+      return 2500;
+    }
 
     // Handle three or more of a kind
     for (let face = 1; face <= 6; face++) {
@@ -528,6 +550,13 @@ class FarkleGame {
 }
 
 // Initialize the game when the DOM is ready
-document.addEventListener("DOMContentLoaded", () => {
-  const game = new FarkleGame();
-});
+if (typeof document !== 'undefined') {
+  document.addEventListener("DOMContentLoaded", () => {
+    const game = new FarkleGame();
+  });
+}
+
+// Export for testing (Node.js environment)
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = FarkleGame;
+}
