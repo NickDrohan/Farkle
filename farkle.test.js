@@ -391,4 +391,44 @@ describe('FarkleGame - Scoring Rules', () => {
       expect(game.diceArea).toBeTruthy();
     });
   });
+
+  describe('updateButtonStates - visual sync', () => {
+    const buttons = () => [game.rollDiceBtn, game.bankDiceBtn, game.endTurnBtn];
+    const expectStylesMatchDisabled = () => {
+      buttons().forEach((btn) => {
+        expect(btn.style.opacity).toBe(btn.disabled ? '0.5' : '1');
+        expect(btn.style.cursor).toBe(btn.disabled ? 'not-allowed' : 'pointer');
+      });
+    };
+
+    test('inactive game: all buttons disabled and styled as disabled', () => {
+      game.disableControls(false);
+      game.gameActive = false;
+      game.updateButtonStates();
+      buttons().forEach((btn) => expect(btn.disabled).toBe(true));
+      expectStylesMatchDisabled();
+    });
+
+    test('no dice on board: bank looks disabled, roll and end turn look enabled', () => {
+      game.disableControls(false);
+      game.gameActive = true;
+      game.dice = [];
+      game.updateButtonStates();
+      expect(game.rollDiceBtn.disabled).toBe(false);
+      expect(game.bankDiceBtn.disabled).toBe(true);
+      expect(game.endTurnBtn.disabled).toBe(false);
+      expectStylesMatchDisabled();
+    });
+
+    test('dice on board with a scoring selection: styles follow disabled state', () => {
+      game.disableControls(true);
+      game.gameActive = true;
+      game.dice = [{ value: 1 }, { value: 2 }];
+      game.diceSelected = [0];
+      game.updateButtonStates();
+      expect(game.rollDiceBtn.disabled).toBe(true);
+      expect(game.bankDiceBtn.disabled).toBe(false);
+      expectStylesMatchDisabled();
+    });
+  });
 });

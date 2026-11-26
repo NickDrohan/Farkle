@@ -512,29 +512,24 @@ class FarkleGame {
       this.rollDiceBtn.disabled = true;
       this.bankDiceBtn.disabled = true;
       this.endTurnBtn.disabled = true;
-      return;
-    }
-
-    // If no dice on board, allow rolling
-    if (this.dice.length === 0) {
+    } else if (this.dice.length === 0) {
       this.rollDiceBtn.disabled = false;
       this.bankDiceBtn.disabled = true;
       this.endTurnBtn.disabled = false;
-      return;
+    } else {
+      // Calculate score for selected dice
+      const selectedValues = this.diceSelected.map((i) => this.dice[i].value);
+      const potentialScore = this.calculateScore(selectedValues);
+
+      // Enable bank button if there are selected dice AND they score points
+      this.bankDiceBtn.disabled = this.diceSelected.length === 0 || potentialScore === 0;
+
+      // Disable roll button if any dice are selected - must bank first
+      this.rollDiceBtn.disabled = this.diceSelected.length > 0;
+
+      // Allow ending turn anytime
+      this.endTurnBtn.disabled = false;
     }
-
-    // Calculate score for selected dice
-    const selectedValues = this.diceSelected.map((i) => this.dice[i].value);
-    const potentialScore = this.calculateScore(selectedValues);
-
-    // Enable bank button if there are selected dice AND they score points
-    this.bankDiceBtn.disabled = this.diceSelected.length === 0 || potentialScore === 0;
-
-    // Disable roll button if any dice are selected - must bank first
-    this.rollDiceBtn.disabled = this.diceSelected.length > 0;
-
-    // Allow ending turn anytime
-    this.endTurnBtn.disabled = false;
 
     // Update visual state of buttons
     [this.rollDiceBtn, this.bankDiceBtn, this.endTurnBtn].forEach(btn => {
